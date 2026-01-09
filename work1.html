@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品详情 - 工业设计作品集</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 作品详情页特定样式 */
+        .work-detail {
+            padding: var(--spacing-xl) 0;
+            margin-top: 80px;
+        }
+        
+        .work-header {
+            margin-bottom: var(--spacing-xl);
+            position: relative;
+        }
+        
+        .work-detail-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .work-meta {
+            display: flex;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .meta-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .meta-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .work-gallery {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .gallery-main {
+            width: 100%;
+            background-color: #e0e0e0;
+            margin-bottom: var(--spacing-lg);
+            overflow: hidden;
+            border: 2px solid var(--color-black);
+        }
+        
+        .gallery-main img {
+            width: 100%;
+            height: 200px;
+            display: block;
+            object-fit: cover;
+        }
+        
+        .gallery-main .placeholder-image {
+            width: 100%;
+            height: 200px;
+            aspect-ratio: 1/1;
+        }
+        
+        .gallery-thumbs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+        }
+        
+        .gallery-thumb {
+            background-color: #e0e0e0;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            border: 2px solid var(--color-black);
+            overflow: hidden;
+        }
+        
+        .gallery-thumb img {
+            width: 100%;
+            height: 200px;
+            display: block;
+            object-fit: cover;
+        }
+        
+        .gallery-thumb .placeholder-image {
+            width: 100%;
+            height: 200px;
+            aspect-ratio: 1/1;
+        }
+        
+        .gallery-thumb:hover {
+            transform: scale(1.05);
+            box-shadow: 5px 5px 0 var(--color-black);
+        }
+        
+        .gallery-thumb.active {
+            border-color: var(--color-red);
+        }
+        
+        /* 新的网格布局样式 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+        }
+        
+        .gallery-item {
+            background-color: #e0e0e0;
+            overflow: hidden;
+            border: 1px solid var(--color-black);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+            aspect-ratio: 1414/2000;
+        }
+        
+        .work-description {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .description-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            text-decoration: none;
+            color: var(--color-black);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--spacing-lg);
+            transition: all var(--transition-normal);
+        }
+        
+        .back-link:hover {
+            color: var(--color-red);
+            gap: var(--spacing-sm);
+        }
+        
+        .back-link::before {
+            content: '←';
+            font-size: 1.2rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .work-detail-title {
+                font-size: 2rem;
+            }
+            
+            .work-meta {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+            
+            .gallery-thumbs {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .work-detail-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <h1 class="brand-name">INDUSTRIAL DESIGN</h1>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="index.html#home" class="nav-link">首页</a></li>
+                <li><a href="index.html#works" class="nav-link">作品集</a></li>
+                <li><a href="index.html#about" class="nav-link">关于</a></li>
+                <li><a href="index.html#contact" class="nav-link">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 作品详情内容 -->
+    <section class="work-detail">
+        <div class="container">
+            <!-- 返回链接 -->
+            <a href="index.html#works" class="back-link">返回作品集</a>
+            
+            <!-- 作品标题和元信息 -->
+            <div class="work-header">
+                <h1 class="work-detail-title">香氛·GardenCarry</h1>
+                <div class="work-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">类别</span>
+                        <span class="meta-value">产品设计</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">年份</span>
+                        <span class="meta-value">2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">工具</span>
+                        <span class="meta-value">C4d、可画、石塑粘土</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">指导老师</span>
+                        <span class="meta-value">徐雯洁</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 作品图片画廊 -->
+            <div class="work-gallery">
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="images/1-1.png" alt="项目名称1">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/1-2.png" alt="项目名称1">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/1-3.png" alt="项目名称1">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/1-4.png" alt="项目名称1">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 作品描述 -->
+            <div class="work-description">
+                <h2 class="description-title">项目概述</h2>
+                <p class="description-text">
+                    这是一个关于生活方式重构与体验提升的设计项目，旨在解决城市生活场景变化中的异味困扰。通过深入的用户研究和市场分析，我发现了现有家居香氛和便携香氛的场景割裂，并以此为基础进行设计。
+                </p>
+                <p class="description-text">
+                    设计过程中，我注重[产品外观与用户情绪，最终实现了一个温暖有创意的产品。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">© 连贯容 工业设计个人作品集
+                
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
